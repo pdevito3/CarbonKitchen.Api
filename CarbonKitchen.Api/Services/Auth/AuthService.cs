@@ -1,6 +1,7 @@
 ﻿namespace CarbonKitchen.Api.Services.Auth
 {
     using CarbonKitchen.Api.Data.Auth;
+    using CarbonKitchen.Api.Data.Entities;
     using Microsoft.IdentityModel.Tokens;
     using System;
     using System.Collections.Generic;
@@ -11,23 +12,31 @@
 
     public class AuthService : IAuthService
     {
-        public Data.Auth.SecurityToken Authenticate(string keyAuth)
+        public Data.Auth.SecurityToken Authenticate(User user)
         {
-            if (string.IsNullOrEmpty(keyAuth))
-                return null;
+            // authenticate
+            /*if (string.IsNullOrEmpty(keyAuth))
+                return null;*/
 
-            // authentication successful so generate jwt token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("E546C8DF278CD5931069B522E695D4F2");
-            var tokenDescriptor = new SecurityTokenDescriptor
+            if(user.Email == "auth@gmail.com" && user.Password == "test")
             {
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var jwtSecurityToken = tokenHandler.WriteToken(token);
+                // authentication successful so generate jwt token
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes("E546C8DF278CD5931069B522E695D4F2");
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Expires = DateTime.UtcNow.AddDays(7),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var jwtSecurityToken = tokenHandler.WriteToken(token);
 
-            return new Data.Auth.SecurityToken() { auth_token = jwtSecurityToken };
+                return new Data.Auth.SecurityToken() { token = jwtSecurityToken };
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

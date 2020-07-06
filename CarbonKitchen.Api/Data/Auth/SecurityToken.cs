@@ -2,6 +2,6 @@
 {
     public class SecurityToken
     {
-        public string auth_token { get; set; }
+        public string token { get; set; }
     }
 }
