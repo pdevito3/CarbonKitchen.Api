@@ -18,6 +18,10 @@ namespace CarbonKitchen.Api
     using System;
     using CarbonKitchen.Api.Services.Recipe;
     using CarbonKitchen.Api.Services.Ingredient;
+    using System.Text;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.IdentityModel.Tokens;
+    using CarbonKitchen.Api.Services.Auth;
 
     public class Startup
     {
@@ -41,12 +45,33 @@ namespace CarbonKitchen.Api
                     .AllowAnyHeader());
             });
 
+            var key = Encoding.ASCII.GetBytes("E546C8DF278CD5931069B522E695D4F2");
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<SieveProcessor>();
 
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
             services.AddScoped<IShoppingListItemRepository, ShoppingListItemRepository>();
+            services.AddScoped<IAuthService, AuthService>();
 
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -72,6 +97,8 @@ namespace CarbonKitchen.Api
             }
 
             app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

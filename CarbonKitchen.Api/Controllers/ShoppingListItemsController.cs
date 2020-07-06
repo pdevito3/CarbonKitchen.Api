@@ -7,12 +7,13 @@
     using CarbonKitchen.Api.Data.Entities;
     using CarbonKitchen.Api.Models.Pagination;
     using CarbonKitchen.Api.Models.ShoppingListItem;
-    using CarbonKitchen.Api.Services;
     using CarbonKitchen.Api.Services.ShoppingListItem;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
+    [Authorize]
     [Route("api/v1/ShoppingListItems")]
     public class ShoppingListItemsController : Controller
     {
