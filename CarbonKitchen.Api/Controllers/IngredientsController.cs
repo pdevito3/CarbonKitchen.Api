@@ -30,7 +30,7 @@
 
 
         [HttpGet(Name = "GetIngredients")]
-        public ActionResult<IEnumerable<IngredientDto>> GetCategories([FromQuery] IngredientParametersDto ingredientParametersDto)
+        public ActionResult<IEnumerable<IngredientDto>> GetIngredients([FromQuery] IngredientParametersDto ingredientParametersDto)
         {
             var ingredientsFromRepo = _ingredientRepository.GetIngredients(ingredientParametersDto);
             
@@ -89,6 +89,29 @@
             var ingredientDto = _mapper.Map<IngredientDto>(ingredient);
             return CreatedAtRoute("GetIngredient",
                 new { ingredientDto.IngredientId },
+                ingredientDto);
+        }
+
+        [HttpPost("list/{recipeId}")]
+        public ActionResult<IngredientDto> AddIngredientList(int recipeId, [FromBody] List<IngredientForCreationDto> ingredientsForCreation)
+        {
+            // delete the previous list
+            /*var parameters = new IngredientParametersDto { Filters = $"RecipeId = {recipeId}", PageSize = 10 };
+            var ingredientsFromRepo = _ingredientRepository.GetIngredients(parameters);*/
+
+            _ingredientRepository.DeleteIngredients(recipeId);
+
+            // then add the new one
+            var ingredients = _mapper.Map<List<Ingredient>>(ingredientsForCreation);
+            _ingredientRepository.AddIngredients(ingredients);
+
+            // save and return new one
+            _ingredientRepository.Save();
+
+            var ingredientDto = _mapper.Map<List<IngredientDto>>(ingredients);
+            return CreatedAtRoute("GetIngredients",
+                1,
+                //new { ingredientDto.RecipeId },
                 ingredientDto);
         }
 

@@ -27,6 +27,6 @@
         public string Unit { get; set; }
 
         [Column("Amount")]
-        public float? Amount { get; set; }
+        public double? Amount { get; set; }
     }
 }

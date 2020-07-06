@@ -21,7 +21,7 @@
         public void DeleteRecipe_ReturnsProperCount()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -31,7 +31,7 @@
             var fakeRecipeThree = new FakeRecipe { }.Generate();
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
 

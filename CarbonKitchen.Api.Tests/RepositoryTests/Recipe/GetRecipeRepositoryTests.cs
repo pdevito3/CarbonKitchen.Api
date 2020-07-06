@@ -20,7 +20,7 @@
         public void GetRecipe_ParametersMatchExpectedValues()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -28,7 +28,7 @@
             var fakeRecipe = new FakeRecipe { }.Generate();
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipe);
                 context.SaveChanges();
@@ -49,7 +49,7 @@
         public void GetRecipes_CountMatchesAndContainsEvuivalentObjects()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -59,7 +59,7 @@
             var fakeRecipeThree = new FakeRecipe { }.Generate();
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();
@@ -85,7 +85,7 @@
         public void GetRecipes_ReturnExpectedPageSize()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -95,7 +95,7 @@
             var fakeRecipeThree = new FakeRecipe { }.Generate();
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();
@@ -120,7 +120,7 @@
         public void GetRecipes_ReturnExpectedPageNumberAndSize()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -130,7 +130,7 @@
             var fakeRecipeThree = new FakeRecipe { }.Generate();
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();
@@ -154,7 +154,7 @@
         public void GetRecipes_ListSortedInAscOrder()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -169,7 +169,7 @@
             fakeRecipeThree.Title = "Charlie";
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();
@@ -190,7 +190,7 @@
         public void GetRecipes_ListSortedInDescOrder()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -205,7 +205,7 @@
             fakeRecipeThree.Title = "Charlie";
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();
@@ -232,7 +232,7 @@
         public void GetRecipes_FilterListWithExact(string filters)
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -248,7 +248,7 @@
             fakeRecipeThree.Title = "Echo";
             fakeRecipeThree.Directions = "Foxtrot";
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();
@@ -273,7 +273,7 @@
         public void GetRecipes_FilterListWithContains(string filters, int expectedCount)
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -291,7 +291,7 @@
             fakeRecipeThree.Directions = "Jonfav";
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();
@@ -315,7 +315,7 @@
         public void GetRecipes_SearchQueryReturnsExpectedRecordCount(string queryString, int expectedCount)
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -333,7 +333,7 @@
             fakeRecipeThree.Directions = "Jonfav";
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.AddRange(fakeRecipeOne, fakeRecipeTwo, fakeRecipeThree);
                 context.SaveChanges();

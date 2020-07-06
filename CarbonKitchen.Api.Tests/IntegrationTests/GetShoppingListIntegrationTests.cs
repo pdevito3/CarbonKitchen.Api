@@ -31,7 +31,7 @@
             var appFactory = _factory;
             using (var scope = appFactory.Services.CreateScope())
             {
-                var context = scope.ServiceProvider.GetRequiredService<ShoppingListItemDbContext>();
+                var context = scope.ServiceProvider.GetRequiredService<CarbonKitchenDbContext>();
                 context.Database.EnsureCreated();
 
                 context.ShoppingListItems.RemoveRange(context.ShoppingListItems);

@@ -14,10 +14,10 @@
 
     public class RecipeRepository : IRecipeRepository
     {
-        private RecipeDbContext _context;
+        private CarbonKitchenDbContext _context;
         private readonly SieveProcessor _sieveProcessor;
 
-        public RecipeRepository(RecipeDbContext context,
+        public RecipeRepository(CarbonKitchenDbContext context,
             SieveProcessor sieveProcessor)
         {
             _context = context

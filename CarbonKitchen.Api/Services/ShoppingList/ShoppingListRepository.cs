@@ -14,10 +14,10 @@
 
     public class ShoppingListItemRepository : IShoppingListItemRepository
     {
-        private ShoppingListItemDbContext _context;
+        private CarbonKitchenDbContext _context;
         private readonly SieveProcessor _sieveProcessor;
 
-        public ShoppingListItemRepository(ShoppingListItemDbContext context,
+        public ShoppingListItemRepository(CarbonKitchenDbContext context,
             SieveProcessor sieveProcessor)
         {
             _context = context

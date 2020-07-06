@@ -19,7 +19,7 @@
         public void AddRecipe_NewRecordAddedWithProperValues()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<RecipeDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"RecipeDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -27,7 +27,7 @@
             var fakeRecipe = new FakeRecipe { }.Generate();
 
             //Act
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 var service = new RecipeRepository(context, new SieveProcessor(sieveOptions));
 
@@ -37,7 +37,7 @@
             }
 
             //Assert
-            using (var context = new RecipeDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.Recipes.Count().Should().Be(1);
 

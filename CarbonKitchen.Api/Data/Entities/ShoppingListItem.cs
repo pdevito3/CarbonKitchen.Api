@@ -14,9 +14,9 @@
         [Sieve(CanFilter = true, CanSort = true)]
         public int ShoppingListItemId { get; set; }
 
-        [Column("ShoppingListId")]
+        [Column("Amount")]
         [Sieve(CanFilter = true, CanSort = true)]
-        public int? ShoppingListId { get; set; }
+        public float? Amount { get; set; }
 
         [Column("Name")]
         [Sieve(CanFilter = true, CanSort = true)]
@@ -26,12 +26,9 @@
         [Sieve(CanFilter = true, CanSort = true)]
         public string Category { get; set; }
 
-        [Column("Amount")]
-        [Sieve(CanFilter = true, CanSort = true)]
-        public float? Amount { get; set; }
-
         [Column("Unit")]
-        public DateTime? Unit { get; set; }
+        [Sieve(CanFilter = true, CanSort = true)]
+        public string Unit { get; set; }
 
         [Column("Acquired")]
         [Sieve(CanFilter = true, CanSort = true)]
@@ -40,5 +37,9 @@
         [Column("Hidden")]
         [Sieve(CanFilter = true, CanSort = true)]
         public bool? Hidden { get; set; } = false;
+
+        [Column("ShoppingListId")]
+        [Sieve(CanFilter = true, CanSort = true)]
+        public int? ShoppingListId { get; set; }
     }
 }

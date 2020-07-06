@@ -20,18 +20,18 @@ namespace CarbonKitchen.Api.Tests
             builder
             .ConfigureServices(services =>
             {
-                // Remove the app's ShoppingListItemDbContext registration.
+                // Remove the app's CarbonKitchenDbContext registration.
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType ==
-                        typeof(DbContextOptions<ShoppingListItemDbContext>));
+                        typeof(DbContextOptions<CarbonKitchenDbContext>));
 
                 if (descriptor != null)
                 {
                     services.Remove(descriptor);
                 }
 
-                // Add ShoppingListItemDbContext using an in-memory database for testing.
-                services.AddDbContext<ShoppingListItemDbContext>(options =>
+                // Add CarbonKitchenDbContext using an in-memory database for testing.
+                services.AddDbContext<CarbonKitchenDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("TestingDb");
                 });
@@ -40,11 +40,11 @@ namespace CarbonKitchen.Api.Tests
                 var sp = services.BuildServiceProvider();
 
                 // Create a scope to obtain a reference to the database
-                // context (ShoppingListItemDbContext).
+                // context (CarbonKitchenDbContext).
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
-                    var db = scopedServices.GetRequiredService<ShoppingListItemDbContext>();
+                    var db = scopedServices.GetRequiredService<CarbonKitchenDbContext>();
 
                     // Ensure the database is created.
                     db.Database.EnsureCreated();

@@ -28,12 +28,11 @@
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-
         [HttpGet(Name = "GetRecipes")]
         public ActionResult<IEnumerable<RecipeDto>> GetCategories([FromQuery] RecipeParametersDto recipeParametersDto)
         {
             var recipesFromRepo = _recipeRepository.GetRecipes(recipeParametersDto);
-            
+
             var previousPageLink = recipesFromRepo.HasPrevious
                     ? CreateRecipesResourceUri(recipeParametersDto,
                         ResourceUriType.PreviousPage)

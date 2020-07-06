@@ -19,7 +19,7 @@
         public void AddShoppingListItem_NewRecordAddedWithProperValues()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -27,7 +27,7 @@
             var fakeShoppingListItem = new FakeShoppingListItem { }.Generate();
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 var service = new ShoppingListItemRepository(context, new SieveProcessor(sieveOptions));
 
@@ -37,7 +37,7 @@
             }
 
             //Assert
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.Count().Should().Be(1);
 

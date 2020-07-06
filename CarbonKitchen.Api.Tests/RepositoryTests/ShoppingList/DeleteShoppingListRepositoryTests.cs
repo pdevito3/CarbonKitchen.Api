@@ -21,7 +21,7 @@
         public void DeleteShoppingListItem_ReturnsProperCount()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -31,7 +31,7 @@
             var fakeShoppingListItemThree = new FakeShoppingListItem { }.Generate();
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
 

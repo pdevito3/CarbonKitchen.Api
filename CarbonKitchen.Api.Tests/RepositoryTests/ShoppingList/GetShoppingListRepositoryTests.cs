@@ -20,7 +20,7 @@
         public void GetShoppingListItem_ParametersMatchExpectedValues()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -28,7 +28,7 @@
             var fakeShoppingListItem = new FakeShoppingListItem { }.Generate();
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItem);
                 context.SaveChanges();
@@ -50,7 +50,7 @@
         public void GetShoppingListItems_CountMatchesAndContainsEvuivalentObjects()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -60,7 +60,7 @@
             var fakeShoppingListItemThree = new FakeShoppingListItem { }.Generate();
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
@@ -86,7 +86,7 @@
         public void GetShoppingListItems_ReturnExpectedPageSize()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -96,7 +96,7 @@
             var fakeShoppingListItemThree = new FakeShoppingListItem { }.Generate();
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
@@ -121,7 +121,7 @@
         public void GetShoppingListItems_ReturnExpectedPageNumberAndSize()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -131,7 +131,7 @@
             var fakeShoppingListItemThree = new FakeShoppingListItem { }.Generate();
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
@@ -155,7 +155,7 @@
         public void GetShoppingListItems_ListSortedInAscOrder()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -170,7 +170,7 @@
             fakeShoppingListItemThree.Name = "Charlie";
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
@@ -191,7 +191,7 @@
         public void GetShoppingListItems_ListSortedInDescOrder()
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -206,7 +206,7 @@
             fakeShoppingListItemThree.Name = "Charlie";
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
@@ -236,7 +236,7 @@
         public void GetShoppingListItems_FilterListWithExact(string filters)
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -257,7 +257,7 @@
             fakeShoppingListItemThree.ShoppingListId = 7;
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
@@ -282,7 +282,7 @@
         public void GetShoppingListItems_FilterListWithContains(string filters, int expectedCount)
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -300,7 +300,7 @@
             fakeShoppingListItemThree.Category = "Jonfav";
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
@@ -324,7 +324,7 @@
         public void GetShoppingListItems_SearchQueryReturnsExpectedRecordCount(string queryString, int expectedCount)
         {
             //Arrange
-            var dbOptions = new DbContextOptionsBuilder<ShoppingListItemDbContext>()
+            var dbOptions = new DbContextOptionsBuilder<CarbonKitchenDbContext>()
                 .UseInMemoryDatabase(databaseName: $"ShoppingListItemDb{Guid.NewGuid()}")
                 .Options;
             var sieveOptions = Options.Create(new SieveOptions());
@@ -342,7 +342,7 @@
             fakeShoppingListItemThree.Category = "Jonfav";
 
             //Act
-            using (var context = new ShoppingListItemDbContext(dbOptions))
+            using (var context = new CarbonKitchenDbContext(dbOptions))
             {
                 context.ShoppingListItems.AddRange(fakeShoppingListItemOne, fakeShoppingListItemTwo, fakeShoppingListItemThree);
                 context.SaveChanges();
