@@ -8,8 +8,6 @@
     {
         public RecipeForManipulationDtoValidator()
         {
-            RuleFor(r => r.Title)
-                .NotEmpty();
         }
     }
 }

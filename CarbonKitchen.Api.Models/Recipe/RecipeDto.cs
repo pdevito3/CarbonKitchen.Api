@@ -5,7 +5,6 @@
     public class RecipeDto
     {
         public int RecipeId { get; set; }
-        public int? RecipeIntField1 { get; set; }
         public string Title { get; set; }
         public string Directions { get; set; }
         public string RecipeSourceLink { get; set; }
