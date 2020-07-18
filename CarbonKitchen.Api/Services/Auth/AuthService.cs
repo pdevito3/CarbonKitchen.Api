@@ -12,7 +12,7 @@
 
     public class AuthService : IAuthService
     {
-        public Data.Auth.SecurityToken Authenticate(User user)
+        public AuthorizedUser Authenticate(User user)
         {
             // authenticate
             /*if (string.IsNullOrEmpty(keyAuth))
@@ -31,7 +31,7 @@
                 var token = tokenHandler.CreateToken(tokenDescriptor);
                 var jwtSecurityToken = tokenHandler.WriteToken(token);
 
-                return new Data.Auth.SecurityToken() { token = jwtSecurityToken };
+                return new AuthorizedUser() { Token = jwtSecurityToken };
             }
             else
             {

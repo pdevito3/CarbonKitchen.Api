@@ -1,4 +1,4 @@
-﻿namespace CarbonKitchen.Api.Controllers
+﻿namespace CarbonKitchen.Api.Controllers.Auth
 {
     using CarbonKitchen.Api.Data.Auth;
     using CarbonKitchen.Api.Data.Entities;
@@ -6,12 +6,12 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/auth")]
+    [Route("api/auth/login")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly IAuthService _authService;
-        public AuthController(IAuthService authService)
+        public LoginController(IAuthService authService)
         {
             _authService = authService;
         }
@@ -20,12 +20,12 @@
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] User user)
         {
-            var token = _authService.Authenticate(user);
+            var authorizedUser = _authService.Authenticate(user);
 
-            if (token == null)
+            if (authorizedUser == null)
                 return Unauthorized(new { message = "Username or password is incorrect" });
 
-            return Ok(token);
+            return Ok(authorizedUser);
         }
 
         //[HttpPost, Route("login")]

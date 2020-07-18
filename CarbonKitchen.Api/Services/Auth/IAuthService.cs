@@ -5,6 +5,6 @@
 
     public interface IAuthService
     {
-        SecurityToken Authenticate(User user);
+        AuthorizedUser Authenticate(User user);
     }
 }
